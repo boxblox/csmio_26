@@ -1,2 +1,87 @@
-# csmio_26
-Workshop examples for 2026 CSMIO Conference, Monterrey, Mexico
+# From Math to Model: GAMS & GAMSPy workshop
+
+Notebooks for a 90-minute, example-driven introduction to algebraic modeling with GAMSPy.
+
+## 0. Install Miniconda and set up Python
+
+1. **Install Miniconda.** Download the installer for your system from <https://www.anaconda.com/download/success> (scroll to *Miniconda Installers*) and run it with the default options. Or, from a terminal:
+
+   ```bash
+   # macOS (Apple silicon; use MacOSX-x86_64 for Intel Macs)
+   curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh
+   bash Miniconda3-latest-MacOSX-arm64.sh
+
+   # Linux
+   curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+   bash Miniconda3-latest-Linux-x86_64.sh
+   ```
+
+   Close and reopen your terminal afterwards. On Windows, use the **Anaconda Prompt** from the Start menu for the commands below.
+
+2. **Create and activate a Python 3.14 environment:**
+
+   ```bash
+   conda create -n gamspy python=3.14 -y
+   conda activate gamspy
+   ```
+
+   If conda asks you to accept its Terms of Service, answer yes.
+
+3. **Install the workshop packages** from the `workshop` folder:
+
+   ```bash
+   cd workshop
+   pip install -r requirements.txt
+   ```
+
+Run `conda activate gamspy` each time you open a new terminal.
+
+## Before the workshop (10 minutes)
+
+1. **Install your free academic license (recommended).** Sign up at the GAMS Academic Program (https://www.gams.com/academics/), copy your access code, then run:
+
+   ```bash
+   gamspy install license <your-access-code>
+   gamspy show license
+   ```
+
+   No license yet? That's fine. GAMSPy's built-in demo license runs every model in this workshop.
+
+2. **Check that it works:**
+
+   ```bash
+   python hello_gamspy.py
+   ```
+
+   You should see `Status: OPTIMAL`.
+
+3. **Open the notebooks** with `jupyter lab` (or in VS Code).
+
+## What's in here
+
+| File | Act | Problem type | What you learn |
+|---|---|---|---|
+| `hello_gamspy.py` | Setup | LP | Your installation and license work |
+| `00_matrix_vs_algebra.ipynb` | Opening · Why an AML? | LP | The coffee network solved twice from one spreadsheet: a hand-built matrix with `scipy.linprog`, and GAMSPy algebra. Same answer, same shadow prices. |
+| `01_coffee_network.ipynb` | 1 · Supply chain | LP | Sets, parameters, equations; reading a solution; shadow prices; what-if loops |
+| `02_blending_exercise.ipynb` | Pair exercise · Process | LP (+ NLP stretch) | Write a model yourself; nonconvex pooling and local optima |
+| `02_blending_solution.ipynb` | | | Solutions to the exercise |
+| `03_unit_commitment.ipynb` | 2 · Energy | MIP | Binary on/off decisions, time lags, relaxation vs. integer |
+| `04_portfolio.ipynb` | 3 · Finance | QCP, MIQCP | Quadratic risk, the efficient frontier, a cap on holdings |
+| `app.py` | Finale · Deploy | QCP / MIQCP | The portfolio model as a web app: `streamlit run app.py` |
+| `data/coffee_network.xlsx` | | | The coffee network data as a spreadsheet: Farms, Roasteries, Cafes and Settings sheets |
+| `data/sector_returns_simulated.csv` | | | Simulated daily returns for 12 fictional sector funds (not real market data) |
+
+Each notebook has **Core** tasks (everyone) and **Stretch** tasks (if you finish early).
+
+## Solvers
+
+A fresh `pip install gamspy` includes CPLEX, CONOPT, PATH and SBB, which cover everything here. `gamspy list solvers --all` shows more you can add with `gamspy install solver <name>`.
+
+## Units and conventions
+
+- Coffee network: tonnes, and costs in $1,000 per tonne.
+- Unit commitment: MW, $ per MWh, $ per start-up.
+- Portfolio: yearly returns and volatility, computed from daily data.
+
+Tested with GAMSPy 1.28.

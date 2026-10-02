@@ -74,6 +74,12 @@ Run `conda activate gamspy` each time you open a new terminal.
 
 Each notebook has **Core** tasks (everyone) and **Stretch** tasks (if you finish early).
 
+## Running on Google Colab
+
+Every notebook starts with a setup cell that runs `%pip install` for the packages it needs. `%pip` installs into the notebook's own kernel, so the same cell works on Colab, in Jupyter and in VS Code. Running locally after `pip install -r requirements.txt`? It just reports that everything is already installed.
+
+Notebooks 00 and 04 also need files from `data/`. On Colab, either upload the `data/` folder in the Files pane or set `REPO_RAW` in the setup cell to the raw URL of the workshop repo.
+
 ## Solvers
 
 A fresh `pip install gamspy` includes CPLEX, CONOPT, PATH and SBB, which cover everything here. `gamspy list solvers --all` shows more you can add with `gamspy install solver <name>`.

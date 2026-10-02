@@ -76,9 +76,24 @@ Each notebook has **Core** tasks (everyone) and **Stretch** tasks (if you finish
 
 ## Running on Google Colab
 
-Every notebook starts with a setup cell that runs `%pip install` for the packages it needs. `%pip` installs into the notebook's own kernel, so the same cell works on Colab, in Jupyter and in VS Code. Running locally after `pip install -r requirements.txt`? It just reports that everything is already installed.
+No local install? Every notebook runs on [Google Colab](https://colab.research.google.com). Skip section 0 and *Before the workshop*, and **run the setup cell at the top of each notebook first**.
 
-Notebooks 00 and 04 also need files from `data/`. On Colab, either upload the `data/` folder in the Files pane or set `REPO_RAW` in the setup cell to the raw URL of the workshop repo.
+**Open a notebook in the browser:** in Colab choose *File → Open notebook → GitHub*, paste `https://github.com/boxblox/csmio_26`, and pick a notebook from `workshop/`. Or open it directly, for example:
+<https://colab.research.google.com/github/boxblox/csmio_26/blob/main/workshop/01_coffee_network.ipynb>
+
+**Or from VS Code** with the Google Colab extension: open the notebook locally and select a Colab kernel. The code then runs on a Google machine, not on your computer. That machine cannot see your local files: its working directory is `/content`, not this repo.
+
+What the setup cell does:
+
+- **Packages.** It runs `%pip install` for the packages the notebook needs. `%pip` installs into the notebook's own kernel, so the same cell works on Colab, in Jupyter and in VS Code. Running locally after `pip install -r requirements.txt`? It just reports that everything is already installed.
+- **Data files.** Notebooks 00 and 04 need files from `data/`. If a file is missing, the setup cell downloads it from this repo on GitHub (`REPO_RAW`, the `main` branch). Locally the files already exist, so nothing is downloaded. If you change a data file, push it before running on Colab, or upload your copy into a `data/` folder in Colab's Files pane.
+- **License (optional).** To use your academic license on Colab, uncomment the `!gamspy install license <your-access-code>` line in the setup cell.
+
+Good to know:
+
+- **Colab sessions are temporary.** When the runtime disconnects or restarts, installed packages, downloaded data and your license are gone. Re-run the setup cell.
+- **Save your work.** Notebooks opened from GitHub are not saved automatically. Use *File → Save a copy in Drive*.
+- **`app.py` is not a notebook.** The Streamlit app needs a local install (`streamlit run app.py`).
 
 ## Solvers
 

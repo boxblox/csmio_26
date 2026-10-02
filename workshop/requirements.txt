@@ -1,0 +1,9 @@
+gamspy>=1.28
+pandas
+numpy
+scipy
+openpyxl
+plotly
+nbformat>=4.2.0
+jupyterlab
+streamlit

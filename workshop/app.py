@@ -21,29 +21,29 @@ def solve_portfolio(mu, cov, funds, appetite, max_funds):
     """Build and solve the Markowitz model for the chosen funds. Returns weights."""
     mu, cov = mu[funds], cov.loc[funds, funds]
     m = gp.Container()
-    s = gp.Set(m, "s", records=funds)
-    s2 = gp.Alias(m, "s2", s)
-    MU = gp.Parameter(m, "mu", domain=s, records=mu.reset_index())
-    COV = gp.Parameter(m, "cov", domain=[s, s2], records=cov.stack().reset_index())
-    w = gp.Variable(m, "w", domain=s, type="positive")
+    s = gp.Set(m, records=funds)
+    s2 = gp.Alias(m, alias_with=s)
+    MU = gp.Parameter(m, domain=s, records=mu.reset_index())
+    COV = gp.Parameter(m, domain=[s, s2], records=cov.stack().reset_index())
+    w = gp.Variable(m, domain=s, type="positive")
 
-    budget = gp.Equation(m, "budget")
+    budget = gp.Equation(m)
     budget[...] = gp.Sum(s, w[s]) == 1
     equations, problem = [budget], "QCP"
 
     if max_funds < len(funds):                      # optional cap on holdings -> MIQCP
-        y = gp.Variable(m, "y", domain=s, type="binary")
-        link = gp.Equation(m, "link", domain=s)
-        cap = gp.Equation(m, "max_funds")
+        y = gp.Variable(m, domain=s, type="binary")
+        link = gp.Equation(m, domain=s)
+        cap = gp.Equation(m)
         link[s] = w[s] <= y[s]
         cap[...] = gp.Sum(s, y[s]) <= max_funds
         equations, problem = equations + [link, cap], "MIQCP"
 
     risk = gp.Sum((s, s2), w[s] * COV[s, s2] * w[s2])
     ret = gp.Sum(s, MU[s] * w[s])
-    model = gp.Model(m, "portfolio", equations=equations, problem=problem,
-                     sense="min", objective=risk - appetite * ret)
-    model.solve(solver="CPLEX")
+    portfolio = gp.Model(m, equations=equations, problem=problem,
+                         sense="min", objective=risk - appetite * ret)
+    portfolio.solve(solver="CPLEX")
     return w.records.set_index("s")["level"].reindex(funds).fillna(0)
 
 

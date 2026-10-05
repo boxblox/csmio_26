@@ -64,7 +64,7 @@ Run `conda activate gamspy` each time you open a new terminal.
 | `hello_gamspy.py` | Setup | LP | Your installation and license work |
 | `00_matrix_vs_algebra.ipynb` | Opening · Why an AML? | LP | The coffee network solved twice from one spreadsheet: a hand-built matrix with `scipy.linprog`, and GAMSPy algebra. Same answer, same shadow prices. |
 | `01_coffee_network.ipynb` | 1 · Supply chain | LP | Sets, parameters, equations; reading a solution; shadow prices; what-if loops |
-| `02_blending_exercise.ipynb` | Pair exercise · Process | LP (+ NLP stretch) | Write a model yourself; nonconvex pooling and local optima |
+| `02_blending_exercise.ipynb` | Exercise · Process | LP (+ NLP stretch) | Write a model yourself; nonconvex pooling and local optima |
 | `02_blending_solution.ipynb` | | | Solutions to the exercise |
 | `03_unit_commitment.ipynb` | 2 · Energy | MIP | Binary on/off decisions, time lags, relaxation vs. integer |
 | `04_portfolio.ipynb` | 3 · Finance | QCP, MIQCP | Quadratic risk, the efficient frontier, a cap on holdings |

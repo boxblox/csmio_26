@@ -38,7 +38,7 @@ Run `conda activate gamspy` each time you open a new terminal.
 
 ## Before the workshop (10 minutes)
 
-1. **Install your free academic license (recommended).** Sign up at the GAMS Academic Program (https://www.gams.com/academics/), copy your access code, then run:
+1. **Install your free academic license (recommended).** Sign up at the GAMS Academic Program (<https://www.gams.com/academics/>), copy your access code, then run:
 
    ```bash
    gamspy install license <your-access-code>
@@ -60,7 +60,7 @@ Run `conda activate gamspy` each time you open a new terminal.
 ## What's in here
 
 | File | Act | Problem type | What you learn |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `hello_gamspy.py` | Setup | LP | Your installation and license work |
 | `00_matrix_vs_algebra.ipynb` | Opening · Why an AML? | LP | The coffee network solved twice from one spreadsheet: a hand-built matrix with `scipy.linprog`, and GAMSPy algebra. Same answer, same shadow prices. |
 | `01_coffee_network.ipynb` | 1 · Supply chain | LP | Sets, parameters, equations; reading a solution; shadow prices; what-if loops |
@@ -78,8 +78,7 @@ Each notebook has **Core** tasks (everyone) and **Stretch** tasks (if you finish
 
 No local install? Every notebook runs on [Google Colab](https://colab.research.google.com). Skip section 0 and *Before the workshop*, and **run the setup cell at the top of each notebook first**.
 
-**Open a notebook in the browser:** in Colab choose *File → Open notebook → GitHub*, paste `https://github.com/boxblox/csmio_26`, and pick a notebook from `workshop/`. Or open it directly, for example:
-<https://colab.research.google.com/github/boxblox/csmio_26/blob/main/workshop/01_coffee_network.ipynb>
+**Open a notebook in the browser:** in Colab choose *File → Open notebook → GitHub*, paste `https://github.com/boxblox/csmio_26`, and pick a notebook from `workshop/`.
 
 **Or from VS Code** with the Google Colab extension: open the notebook locally and select a Colab kernel. The code then runs on a Google machine, not on your computer. That machine cannot see your local files: its working directory is `/content`, not this repo.
 

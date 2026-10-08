@@ -8,15 +8,15 @@ import gamspy as gp
 m = gp.Container()
 
 # A tiny LP: make chairs and desks to maximize profit with limited wood and labor.
-chairs = gp.Variable(m, "chairs", type="positive")
-desks = gp.Variable(m, "desks", type="positive")
+chairs = gp.Variable(m, type="positive")
+desks = gp.Variable(m, type="positive")
 
-wood = gp.Equation(m, "wood")
-labor = gp.Equation(m, "labor")
+wood = gp.Equation(m)
+labor = gp.Equation(m)
 wood[...] = 2 * chairs + 5 * desks <= 100
 labor[...] = 3 * chairs + 2 * desks <= 60
 
-hello = gp.Model(m, "hello", equations=[wood, labor], problem="LP",
+hello = gp.Model(m, equations=[wood, labor], problem="LP",
                  sense="max", objective=30 * chairs + 60 * desks)
 hello.solve()
 
